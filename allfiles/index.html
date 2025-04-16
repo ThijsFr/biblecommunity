@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Bible Hub</title>
+    <!-- tablat icon-->
+    <link rel="icon" type="image/png" sizes="300x250" href="church.jpg">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ed826e2ed5.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+
+
+
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a <p class="text" href="" data-text="Bible app">
+                    Bible<span> Hub</span>
+                    </p>
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+
+                        .text {
+                            font-family: 'Montserrat', sans-serif;
+                            text-transform: uppercase;
+                            font-size: 40px;
+                            -webkit-text-stroke: 1px #eee;
+                            color: transparent;
+                            letter-spacing: 5px;
+                            position: relative;
+                        }
+
+                        .jesus {
+                            color: blue;
+                        }
+
+
+
+                        @keyframes text-fill {
+                            100% {
+                                width: 100%
+                            }
+                        }
+                    </style> <!--href="https://discord.gg/yaPzfdmRZM">Coding<span> Community</span>  -->
+                </a></div>
+            <ul class="menu">
+                <li><a href="#home" class="menu-btn">Home</a></li>
+                <li><a href="music.html" class="menu-btn">Gospel music</a></li>
+                <li><a href="quiz.html" class="menu-btn">Bible Quiz</a></li>
+
+            </ul>
+            <div class="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="home" id="home">
+        <div class="max-width">
+            <div class="home-content">
+
+
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="max-width">
+            <h2 class="title">Grow closer to <font color="red"> Jesus</font>
+            </h2>
+            <div class="about-content">
+                <div class="column left">
+                    <img src="images/church.jpg" alt="avatar">
+
+                </div>
+                <div class="column right">
+                    <h1>
+                        <font color="black">
+                            <font color="red"> Jesus</font> is waiting for you
+                        </font>
+                    </h1> <br> <br>
+                    <p>No matter where you are in life, Jesus is waiting with open arms.
+                        <br>His love is endless, and His grace is freely given. You don’t have to earn it<br>just accept
+                        Him into your heart. He is <u>the way</u>, <u>the truth</u>, and <u>the life</u>,<br>
+                        ready to bring you peace, hope, and eternal joy. <br>Will you say yes to Him today?
+                    </p>
+
+                    <button onclick="window.location.href='morelord.html'"
+                        style="background-color: #004b9248; color: white; padding: 15px 30px; font-size: 1.1em; border: none; border-radius: 25px; cursor: pointer; transition: background-color 0.3s;">
+                        Learn more!
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- tussenstuk -->
+
+    <script src="bible.js"></script>
+    <style>
+        .daily-verse-widget {
+            font-family: Arial, sans-serif;
+        }
+
+        .daily-verse-container {
+            background-color: #fdf6e3;
+            padding: 40px 30px;
+            border: 5px solid #8b4513;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            text-align: center;
+            margin: 20px auto;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .daily-verse-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .daily-verse-container::before,
+        .daily-verse-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 15px;
+            background: #8b4513;
+            transition: background 0.3s ease;
+        }
+
+        .daily-verse-container:hover::before,
+        .daily-verse-container:hover::after {
+            background: #a0522d;
+        }
+
+        .daily-verse-container::before {
+            left: -20px;
+            border-radius: 10px 0 0 10px;
+        }
+
+        .daily-verse-container::after {
+            right: -20px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .daily-verse-text {
+            font-size: 1.6em;
+            color: #4b3621;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .daily-verse-reference {
+            margin-top: 15px;
+            font-size: 1.2em;
+            color: #6b4226;
+            font-weight: bold;
+        }
+
+        .daily-banner {
+            background-color: #004b9248;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.4em;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px 0;
+        }
+
+        .refresh-button {
+            background-color: #004b9248;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 15px auto;
+            display: block;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .refresh-button:hover {
+            background-color: #004b9248;
+            transform: scale(1.05);
+        }
+    </style>
+    </head>
+
+    <body>
+        <div class="daily-verse-widget">
+            <div class="daily-banner">A bible verse to get through the day.</div>
+            <div class="daily-verse-container">
+                <p id="bibleVerse" class="daily-verse-text">Loading...</p>
+            </div>
+            <button class="refresh-button" onclick="fetchDailyVerse()">Refresh</button>
+        </div>
+
+
+        <div class="daily-banner">Do the Christian quiz</div>
+        <section class="about" id="about">
+            <div class="max-width">
+
+
+                <div class="about-content">
+                    <div class="column left">
+                        <img src="images/quiz.jpg" alt="avatar">
+
+                    </div>
+                    <div class="column right">
+
+
+                        <button onclick="window.location.href='quiz.html'"
+                            style="background-color: #004b9248; color: white; padding: 15px 30px; font-size: 1.1em; border: none; border-radius: 25px; cursor: pointer; transition: background-color 0.3s;">
+                            Do the quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="daily-banner">Do the Christian quiz</div>
+        <section style="background-color: #f8f1e9; padding: 50px 20px; font-family: Arial, sans-serif;">
+            <div class="max-width">
+                <h2 style="color: #2c3e50; font-size: 2.5em; text-align: center; margin-bottom: 40px;">Why Is Gospel Music Good?</h2>
+
+                <!-- First Row: Brings You Closer to God & Helps Resist Temptations -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 40px;">
+                    <!-- Left Column: Brings You Closer to God -->
+                    <div style="width: calc(50% - 20px); margin-bottom: 20px;">
+                        <h3 style="color: #2c3e50; font-size: 1.8em; margin-bottom: 15px;">Brings You Closer to God</h3>
+                        <p style="color: #34495e; font-size: 1.1em; line-height: 1.6;">
+                            Gospel music is a form of worship that invites you to connect deeply with God. Its soulful
+                            melodies and lyrics, often drawn from scripture or personal testimonies of faith, create an
+                            atmosphere of reverence and gratitude. Singing or listening to Gospel music can feel like a
+                            direct conversation with God, strengthening your spiritual bond and filling you with His
+                            peace and love. It’s a reminder of His presence in your life, encouraging you to trust Him
+                            through every season.
+                        </p>
+                    </div>
+                    <!-- Right Column: Helps Resist Temptations -->
+                    <div style="width: calc(50% - 20px); margin-bottom: 20px;">
+                        <h3 style="color: #2c3e50; font-size: 1.8em; margin-bottom: 15px;">Helps Resist Temptations</h3>
+                        <p style="color: #34495e; font-size: 1.1em; line-height: 1.6;">
+                            Gospel music acts as a shield against negative influences and temptations, such as the urge
+                            to curse, argue, or engage in harmful behavior. When you sing along to uplifting Gospel
+                            songs, your mind and heart are focused on positive, God-centered messages. This makes it
+                            harder for sinful thoughts or actions to take root. For example, instead of giving in to
+                            anger or frustration, singing lyrics about God’s grace and forgiveness redirects your
+                            emotions toward love and patience.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Second Row: Encourages Joyful Expression & Heals and Uplifts -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 40px;">
+                    <!-- Left Column: Encourages Joyful Expression -->
+                    <div style="width: calc(50% - 20px); margin-bottom: 20px;">
+                        <h3 style="color: #2c3e50; font-size: 1.8em; margin-bottom: 15px;">Encourages Joyful Expression
+                        </h3>
+                        <p style="color: #34495e; font-size: 1.1em; line-height: 1.6;">
+                            The vibrant rhythms and heartfelt words of Gospel music inspire you to sing, clap, or even
+                            dance, channeling your energy into joyful worship. Singing along not only boosts your mood
+                            but also replaces negative impulses with praise. It’s a way to express your faith actively,
+                            uniting you with others in a shared celebration of God’s goodness. Whether in a church choir
+                            or at home, Gospel music creates a space for spiritual renewal and community.
+                        </p>
+                    </div>
+                    <!-- Right Column: Heals and Uplifts -->
+                    <div style="width: calc(50% - 20px); margin-bottom: 20px;">
+                        <h3 style="color: #2c3e50; font-size: 1.8em; margin-bottom: 15px;">Heals and Uplifts</h3>
+                        <p style="color: #34495e; font-size: 1.1em; line-height: 1.6;">
+                            Beyond its spiritual benefits, Gospel music has the power to heal emotional wounds and lift
+                            your spirit during difficult times. Its messages of hope, redemption, and God’s unending
+                            love remind you that you’re never alone. This emotional and spiritual upliftment helps you
+                            face life’s challenges with courage and optimism, knowing God is by your side.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div style="text-align: center;">
+                    <button onclick="window.location.href='Music.html'"
+                        style="background-color: #004b9248; color: white; padding: 15px 30px; font-size: 1.1em; border: none; border-radius: 25px; cursor: pointer; transition: background-color 0.3s;">
+                        Discover More Gospel Music
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CSS Enhancements (to be added to style.css) -->
+        <style>
+            @media (max-width: 947px) {
+                section .gospel-columns {
+                    flex-direction: column;
+                }
+
+                section .gospel-columns>div {
+                    width: 100% !important;
+                }
+            }
+        </style>
+
+
+
+
+
+
+        <footer>
+            <span> <a href="creds.html"> Thijs van Andel</a> | All rights deserved <span
+                    class="far fa-copyright"></span> 2025 </span>
+        </footer>
+
+
+        <script src="script.js"></script>
+    </body>
+
+</html>

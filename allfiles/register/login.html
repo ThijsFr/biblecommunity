@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .left,
+        .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left {
+            background-color: #0e3a5c;
+            color: white;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .right {
+            background-color: #f4f4f4;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0e3a5c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0e3a5c;
+        }
+
+        h4 {
+            text-align: left;
+            color: cadetblue;
+        }
+
+        a {
+            text-decoration: none;
+
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+    </style>
+
+    <script type="module" src="login.js" defer></script>
+</head>
+
+<body>
+
+    <!-- sign up-->
+    <div class="container">
+        <div class="left">
+            <h1>Bible Study</h1>
+            <p>Welcome to the Interactive Bible Study Platform. Engage, Learn, and Grow.</p>
+        </div>
+        <div class="right">
+            <div class="form-container">
+                <h2>Login</h2>
+                <input type="email" placeholder="Email" id="email">
+                <input type="password" placeholder="Password" id="password">
+                <button id="submit" type="submit">Login</button>
+                <h4> <a href="lregister.html">sign up</a> </h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- sign up-->
+
+    <!-- log in-->
+
+
+</body>
+
+</html>

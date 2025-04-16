@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            position: relative;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+        }
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background-color: #456b8b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #456b8b;
+        }
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #456b8b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("jV-3qVNQZjUS9yGRW"); // Vervang met je EmailJS Public Key
+        })();
+    </script>
+</head>
+<body>
+
+<!-- Home Button -->
+<button class="home-button" onclick="window.location.href='index.html'">
+    <i class="fas fa-home"></i>
+</button>
+
+<!-- Formulier Container -->
+<div class="form-container">
+    <h2>Voeg je Playlist Toe</h2>
+    <form id="playlist-form">
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+        <input type="text" id="playlist" name="message" placeholder="Spotify Playlist Link" required>
+        <button type="submit">Verzenden</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('playlist-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Voeg het huidige tijdstip toe aan het formulier
+        const currentTime = new Date().toLocaleString();
+        const timeInput = document.createElement('input');
+        timeInput.type = 'hidden';
+        timeInput.name = 'time';
+        timeInput.value = currentTime;
+        this.appendChild(timeInput);
+
+        // Verzend het formulier via EmailJS
+        emailjs.sendForm('service_d1385ao', 'template_z956565', this) // Vervang met je Service ID en Template ID
+            .then(function(response) {
+                alert('Bedankt! Je playlist is succesvol verzonden.');
+                window.location.href = 'index.html';
+            }, function(error) {
+                alert('Er is een fout opgetreden. Probeer het later opnieuw.');
+            });
+    });
+</script>
+
+</body>
+</html>
+
+
+<!-- 
+jV-3qVNQZjUS9yGRW public 'service_d1385ao', 'template_z956565'
+-- >

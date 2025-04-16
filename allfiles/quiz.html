@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Hub</title>
+
+  
+    <style>
+        :root {
+            --primary: #8b4513;
+            --secondary: #d4a76a;
+            --light: #f5deb3;
+            --dark: #5a2d0c;
+            --success: #4CAF50;
+            --wrong: #f44336;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f3e9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            font-size: 2.5em;
+        }
+        
+        .quiz-intro {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            color: var(--dark);
+        }
+        
+        .quiz-container {
+            display: none;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #f5f5dc 0%, #f5deb3 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+            position: relative;
+        }
+        
+        .question-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .question-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .option {
+            padding: 15px;
+            background-color: white;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1em;
+            text-align: left;
+        }
+        
+        .option:hover {
+            background-color: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .option.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        
+        .option.wrong {
+            background-color: var(--wrong);
+            color: white;
+            border-color: var(--wrong);
+        }
+        
+        .next-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .next-btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .results-container {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .results-title {
+            font-size: 2em;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .score-text {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success) 0%, var(--light) 0%);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: var(--dark);
+            position: relative;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .share-whatsapp {
+            background-color: #25D366;
+        }
+        
+        .share-facebook {
+            background-color: #3b5998;
+        }
+        
+        .share-twitter {
+            background-color: #1DA1F2;
+        }
+        
+        .restart-btn {
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .restart-btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .start-screen {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .start-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        
+        .quiz-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/3271/3271169.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .option {
+                padding: 12px;
+                font-size: 1em;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .share-btn {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #8b4513;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            z-index: 1000; /* Zorgt ervoor dat de knop boven andere elementen staat */
+        }
+        .home-button:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="home-button">Home</a>
+  
+    </button>
+    <div class="container">
+        <h1>Christian quiz</h1>
+        
+        <div class="start-screen" id="start-screen">
+            <div class="quiz-image"></div>
+            <h2>Test your bible knowledge</h2>
+            <p></p>
+            <button class="start-btn" id="start-btn">Start Quiz</button>
+        </div>
+        
+        <div class="quiz-container" id="quiz-container">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="question-container" id="question-container">
+                <div class="question-number" id="question-number">quistion 1/20</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
+                <button class="next-btn" id="next-btn">Next</button>
+            </div>
+        </div>
+        
+        <div class="results-container" id="results-container">
+            <h2 class="results-title">Quiz complete!</h2>
+            <div class="score-circle" id="score-circle">
+                <span id="score-percentage">0%</span>
+            </div>
+            <div class="score-text" id="score-text"></div>
+            <div class="share-buttons">
+                <a href="#" class="share-btn share-whatsapp" id="share-whatsapp">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                    </svg>
+                    WhatsApp
+                </a>
+                <a href="#" class="share-btn share-facebook" id="share-facebook">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                    </svg>
+                    Facebook
+                </a>
+                <a href="#" class="share-btn share-twitter" id="share-twitter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A3.328 3.328 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                    </svg>
+                    Twitter
+                </a>
+            </div>
+            <button class="restart-btn" id="restart-btn">Play again</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data
+        const quizData = [
+  
+            {
+                question: "Who is known as the 'Father of Faith' in the Bible?",
+                options: ["Moses", "Abraham", "David", "Noah"],
+                correct: 1
+            },
+            {
+                question: "What is the first book of the New Testament?",
+                options: ["Mark", "Luke", "Matthew", "John"],
+                correct: 2
+            },
+            {
+                question: "How many days did Jesus fast in the wilderness?",
+                options: ["30 days", "40 days", "50 days", "60 days"],
+                correct: 1
+            },
+            {
+                question: "What is the last book of the Bible?",
+                options: ["Revelation", "Jude", "3 John", "Acts"],
+                correct: 0
+            },
+            {
+                question: "Who betrayed Jesus to the authorities?",
+                options: ["Peter", "Judas Iscariot", "Thomas", "John"],
+                correct: 1
+            },
+            {
+                question: "What is the name of the garden where Jesus prayed before His arrest?",
+                options: ["Eden", "Gethsemane", "Galilee", "Nazareth"],
+                correct: 1
+            },
+            {
+                question: "How many disciples did Jesus have?",
+                options: ["10", "11", "12", "13"],
+                correct: 2
+            },
+            {
+                question: "What did Jesus turn into wine at the wedding in Cana?",
+                options: ["Water", "Juice", "Milk", "Oil"],
+                correct: 0
+            },
+            {
+                question: "Who wrote the majority of the New Testament letters?",
+                options: ["Peter", "Paul", "John", "James"],
+                correct: 1
+            },
+            {
+                question: "What is the shortest verse in the Bible?",
+                options: ["John 3:16", "Jesus wept", "God is love", "Pray always"],
+                correct: 1
+            },
+            {
+                question: "What animal is often used to represent the Holy Spirit?",
+                options: ["Lion", "Lamb", "Dove", "Eagle"],
+                correct: 2
+            },
+            {
+                question: "What is the name of the mountain where Moses received the Ten Commandments?",
+                options: ["Mount Zion", "Mount Sinai", "Mount Carmel", "Mount of Olives"],
+                correct: 1
+            },
+            {
+                question: "Who was the first man created by God?",
+                options: ["Adam", "Noah", "Abraham", "Isaac"],
+                correct: 0
+            },
+            {
+                question: "What is the name of the sea that Moses parted?",
+                options: ["Dead Sea", "Red Sea", "Sea of Galilee", "Mediterranean Sea"],
+                correct: 1
+            },
+            {
+                question: "What did Jesus say is the greatest commandment?",
+                options: ["Honor your parents", "Love your neighbor as yourself", "Love the Lord your God with all your heart", "Do not steal"],
+                correct: 2
+            },
+            {
+                question: "Who was the mother of Jesus?",
+                options: ["Mary Magdalene", "Martha", "Mary", "Elizabeth"],
+                correct: 2
+            },
+            {
+                question: "What is the name of the angel who announced Jesus' birth to Mary?",
+                options: ["Michael", "Gabriel", "Raphael", "Uriel"],
+                correct: 1
+            },
+            {
+                question: "How many books are in the Protestant Bible?",
+                options: ["66", "72", "77", "81"],
+                correct: 0
+            },
+            {
+                question: "What is the name of the city where Jesus was born?",
+                options: ["Jerusalem", "Nazareth", "Bethlehem", "Capernaum"],
+                correct: 2
+            },
+            {
+                question: "What did Jesus use to feed 5,000 people?",
+                options: ["Five loaves and two fish", "Seven loaves and a few fish", "Two loaves and five fish", "Three loaves and three fish"],
+                correct: 0
+            },
+            {
+                question: "Who denied Jesus three times before the rooster crowed?",
+                options: ["Judas", "Peter", "Thomas", "Andrew"],
+                correct: 1
+            },
+            {
+                question: "What is the name of the event where Jesus ascended into heaven?",
+                options: ["Transfiguration", "Ascension", "Resurrection", "Crucifixion"],
+                correct: 1
+            },
+            {
+                question: "What is the first of the Ten Commandments?",
+                options: ["You shall not steal", "You shall have no other gods before me", "Honor your father and mother", "You shall not murder"],
+                correct: 1
+            },
+            {
+                question: "What is the name of the day when Jesus rose from the dead?",
+                options: ["Good Friday", "Easter Sunday", "Palm Sunday", "Pentecost"],
+                correct: 1
+            },
+            {
+                question: "What is the name of the event where the Holy Spirit descended on the apostles?",
+                options: ["Pentecost", "Ascension", "Transfiguration", "Last Supper"],
+                correct: 0
+            }
+        ];   
+
+        // DOM elements
+        const startScreen = document.getElementById('start-screen');
+        const startBtn = document.getElementById('start-btn');
+        const quizContainer = document.getElementById('quiz-container');
+        const questionContainer = document.getElementById('question-container');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const resultsContainer = document.getElementById('results-container');
+        const scoreCircle = document.getElementById('score-circle');
+        const scorePercentage = document.getElementById('score-percentage');
+        const scoreText = document.getElementById('score-text');
+        const restartBtn = document.getElementById('restart-btn');
+        const shareWhatsapp = document.getElementById('share-whatsapp');
+        const shareFacebook = document.getElementById('share-facebook');
+        const shareTwitter = document.getElementById('share-twitter');
+
+        // Quiz state
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedOption = null;
+        let quizStarted = false;
+
+        // Start quiz
+        startBtn.addEventListener('click', () => {
+            startScreen.style.display = 'none';
+            quizContainer.style.display = 'block';
+            quizStarted = true;
+            loadQuestion();
+        });
+
+        // Load question
+        function loadQuestion() {
+            resetState();
+            const question = quizData[currentQuestion];
+            questionNumber.textContent = `question ${currentQuestion + 1}/${quizData.length}`;
+            questionText.textContent = question.question;
+            
+            // Update progress bar
+            progressBar.style.width = `${((currentQuestion) / quizData.length) * 100}%`;
+            
+            // Create options
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option');
+                button.addEventListener('click', () => selectOption(index));
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // Reset state for new question
+        function resetState() {
+            while (optionsContainer.firstChild) {
+                optionsContainer.removeChild(optionsContainer.firstChild);
+            }
+            selectedOption = null;
+            nextBtn.style.display = 'none';
+        }
+
+        // Select option
+        function selectOption(index) {
+            selectedOption = index;
+            const options = document.querySelectorAll('.option');
+            const question = quizData[currentQuestion];
+            
+            options.forEach((option, i) => {
+                if (i === question.correct) {
+                    option.classList.add('correct');
+                }
+                if (i === index && i !== question.correct) {
+                    option.classList.add('wrong');
+                }
+                option.style.pointerEvents = 'none';
+            });
+            
+            // Check if answer is correct
+            if (index === question.correct) {
+                score++;
+                createConfetti();
+            }
+            
+            nextBtn.style.display = 'block';
+        }
+
+        // Next question
+        nextBtn.addEventListener('click', () => {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            const percentage = Math.round((score / quizData.length) * 100);
+            scorePercentage.textContent = `${percentage}%`;
+            
+            // Animate score circle
+            let current = 0;
+            const interval = setInterval(() => {
+                if (current >= percentage) {
+                    clearInterval(interval);
+                } else {
+                    current++;
+                    scoreCircle.style.background = `conic-gradient(var(--success) ${current}%, var(--light) ${current}%)`;
+                    scorePercentage.textContent = `${current}%`;
+                }
+            }, 20);
+            
+            // Set score text
+            let message = '';
+            if (percentage === 100) {
+                message = 'Perfect! You know the bible in & out';
+            } else if (percentage >= 80) {
+                message = 'Good job! You did great!';
+            } else if (percentage >= 60) {
+                message = 'Not the worst! You know a lot already.';
+            } else if (percentage >= 40) {
+                message = 'Could have been better! Maybe pick up your bible more often!';
+            } else {
+                message = 'AucH! Room for improvement. time to pick up your bible.';
+            }
+            
+            scoreText.innerHTML = `Je scoorde ${score} van de ${quizData.length} vragen goed.<br>${message}`;
+            
+            // Set share links
+            const shareMessage = `Ik scoorde ${percentage}% op de Christelijke Quiz! Kun jij het beter?`;
+            const shareUrl = window.location.href;
+            
+            shareWhatsapp.href = `https://wa.me/?text=${encodeURIComponent(shareMessage + ' ' + shareUrl)}`;
+            shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareMessage)}`;
+            shareTwitter.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}&url=${encodeURIComponent(shareUrl)}`;
+        }
+
+        // Restart quiz
+        restartBtn.addEventListener('click', () => {
+            currentQuestion = 0;
+            score = 0;
+            resultsContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+            loadQuestion();
+        });
+
+        // Confetti animation
+        function createConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8800'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = `${Math.random() * 10 + 5}px`;
+                confetti.style.height = `${Math.random() * 10 + 5}px`;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                document.body.appendChild(confetti);
+                
+                const animationDuration = Math.random() * 3 + 2;
+                
+                confetti.animate([
+                    { top: '-10px', opacity: 1 },
+                    { top: `${Math.random() * 100 + 50}vh`, opacity: 0 }
+                ], {
+                    duration: animationDuration * 1000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)'
+                });
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, animationDuration * 1000);
+            }
+        }
+
+        // Initialize
+        if (!quizStarted) {
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
